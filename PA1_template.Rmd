@@ -29,18 +29,24 @@ keep_md: true
         mysteps <- dplyr::group_by(mysteps,date)
         #calculate the total sum of steps, mean steps, and median steps by date
         sumSteps <- dplyr::summarise(mysteps, tSteps = sum(steps),meanSteps = mean(steps), medianSteps = median(steps))
-         #Plot histogram of total steps per day
-       plot(sumSteps$date,sumSteps$tSteps, type = 'h',
-             xlab = "Date",ylab = "Total Steps", 
-             main = "Histogram of Total Steps per Day")
-       #Plot histogram of mean steps per day
-       plot(sumSteps$date,sumSteps$meanSteps, type = 'h',
-            xlab = "Date",ylab = "Mean Steps", 
-            main = "Histogram of Mean Steps per Day")
-       #Plot histogram of median steps per day
-       plot(sumSteps$date,sumSteps$medianSteps, type = 'h',
-            xlab = "Date",ylab = "Median Steps", 
-            main = "Histogram of Median Steps per Day")    
+ ```
+ 
+ The Median steps per day: 
+```{r}
+median(sumSteps$tSteps) 
+```
+The Mean steps per day:
+```{r}
+mean(sumSteps$tSteps)
+```
+
+ 
+ ```{r}
+        
+        #Plot histogram of total steps per day
+        hist(sumSteps$tSteps,
+             main = "Histogram of Total Steps per Day",
+             xlab="Total Steps per Day")
         
 ```
 

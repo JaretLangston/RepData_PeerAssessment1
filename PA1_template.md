@@ -24,31 +24,37 @@ April 10, 2016
         mysteps <- dplyr::group_by(mysteps,date)
         #calculate the total sum of steps, mean steps, and median steps by date
         sumSteps <- dplyr::summarise(mysteps, tSteps = sum(steps),meanSteps = mean(steps), medianSteps = median(steps))
-         #Plot histogram of total steps per day
-       plot(sumSteps$date,sumSteps$tSteps, type = 'h',
-             xlab = "Date",ylab = "Total Steps", 
-             main = "Histogram of Total Steps per Day")
 ```
-
-![](PA1_template_files/figure-html/unnamed-chunk-2-1.png)<!-- -->
+ 
+ The Median steps per day: 
 
 ```r
-       #Plot histogram of mean steps per day
-       plot(sumSteps$date,sumSteps$meanSteps, type = 'h',
-            xlab = "Date",ylab = "Mean Steps", 
-            main = "Histogram of Mean Steps per Day")
+median(sumSteps$tSteps) 
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-2-2.png)<!-- -->
+```
+## [1] 10765
+```
+The Mean steps per day:
 
 ```r
-       #Plot histogram of median steps per day
-       plot(sumSteps$date,sumSteps$medianSteps, type = 'h',
-            xlab = "Date",ylab = "Median Steps", 
-            main = "Histogram of Median Steps per Day")    
+mean(sumSteps$tSteps)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-2-3.png)<!-- -->
+```
+## [1] 10766.19
+```
+
+ 
+ 
+ ```r
+        #Plot histogram of total steps per day
+        hist(sumSteps$tSteps,
+             main = "Histogram of Total Steps per Day",
+             xlab="Total Steps per Day")
+ ```
+ 
+ ![](PA1_template_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
 
 
 ## What is the average daily activity pattern?
@@ -66,7 +72,7 @@ April 10, 2016
              main = "Histogram of Mean Steps per Interval")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-3-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
 
 
 ## Imputing missing values
@@ -119,7 +125,7 @@ April 10, 2016
              main = "Histogram of Total Steps per Day w/o NA")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
 
 Total steps per day is not very different from earlier plot, but does include values that were missing before.
 
@@ -132,7 +138,7 @@ Total steps per day is not very different from earlier plot, but does include va
             main = "Histogram of Mean Steps per Day w/o NA")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
 
 Mean steps per day is not very different from earlier plot, but does include values that were missing before.
 
@@ -145,7 +151,7 @@ Mean steps per day is not very different from earlier plot, but does include val
             main = "Histogram of Median Steps per Day w/o NA") 
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
 
 Median steps per day now does not have any missing values as compared to the earlier plot.
 
@@ -174,7 +180,7 @@ Median steps per day now does not have any missing values as compared to the ear
         mtext("Average steps for weekend and weekday", side=3, line=1, outer=TRUE, cex=2, font=2)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
 
 ```r
         #render plots
