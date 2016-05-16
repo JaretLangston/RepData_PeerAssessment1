@@ -1,6 +1,6 @@
 # Reproducible Research: Peer Assessment 1
 Jaret Langston  
-April 10, 2016  
+May 16, 2016  
 
 
 ## Loading and preprocessing the data
@@ -65,11 +65,9 @@ mean(sumSteps$tSteps)
         #group the dataframe by interval
         mysteps <- dplyr::group_by(mysteps,interval)
         #calculate the total mean steps by interval
-        sumSteps <- dplyr::summarise(mysteps, meanSteps = mean(steps))
+        sumSteps <- dplyr::summarise(mysteps, meanSteps = mean(steps), medianSteps = median(steps))
          #Plot histogram of mean steps per interval
-       plot(sumSteps$interval,sumSteps$tSteps, type = 'l',
-             xlab = "Interval",ylab = "Mean Steps", 
-             main = "Histogram of Mean Steps per Interval")
+        hist(sumSteps$meanSteps,main ="Histogram of Mean Steps per Interval",xlab = "Mean Steps")
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
@@ -120,8 +118,8 @@ mean(sumSteps$tSteps)
         #calculate the total sum of steps, mean steps, and median steps by date
         sumSteps <- dplyr::summarise(mysteps, tSteps = sum(steps),meanSteps = mean(steps), medianSteps = median(steps))
          #Plot histogram of total steps per day
-       plot(sumSteps$date,sumSteps$tSteps, type = 'h',
-             xlab = "Date",ylab = "Total Steps", 
+       hist(sumSteps$tSteps, 
+             xlab = "Total Steps", 
              main = "Histogram of Total Steps per Day w/o NA")
 ```
 
@@ -133,27 +131,28 @@ Total steps per day is not very different from earlier plot, but does include va
 
 ```r
        #Plot histogram of mean steps per day
-       plot(sumSteps$date,sumSteps$meanSteps, type = 'h',
-            xlab = "Date",ylab = "Mean Steps", 
+       
+       hist(sumSteps$meanSteps,
+            xlab = "Mean Steps", 
             main = "Histogram of Mean Steps per Day w/o NA")
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
 
-Mean steps per day is not very different from earlier plot, but does include values that were missing before.
+Mean steps per day is not different from earlier plot, but does include values that were missing before.
 
 
 
 ```r
        #Plot histogram of median steps per day
-       plot(sumSteps$date,sumSteps$medianSteps, type = 'h',
-            xlab = "Date",ylab = "Median Steps", 
+       hist(sumSteps$medianSteps, 
+            xlab = "Median Steps", 
             main = "Histogram of Median Steps per Day w/o NA") 
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
 
-Median steps per day now does not have any missing values as compared to the earlier plot.
+Median steps per day before and after imputting missing values calculated to zero..
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
